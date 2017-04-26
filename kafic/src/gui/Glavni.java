@@ -16,6 +16,9 @@ import java.util.GregorianCalendar;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Glavni extends JFrame {
 
@@ -95,6 +98,35 @@ public class Glavni extends JFrame {
 			panel = new JPanel();
 			panel.setAutoscrolls(true);
 			panel.setLayout(null);
+			
+			JButton btnSto1 = new JButton("Sto1");
+			btnSto1.setIcon(new ImageIcon("C:\\Users\\urosm\\git\\project9-2017\\kafic\\icons\\sto.png"));
+			btnSto1.setBounds(290, 120, 360, 320);
+			panel.add(btnSto1);
+			
+			JButton btnSto2 = new JButton("Sto2");
+			btnSto2.setIcon(new ImageIcon("C:\\Users\\urosm\\git\\project9-2017\\kafic\\icons\\sto.png"));
+			btnSto2.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+				}
+			});
+			btnSto2.setBounds(1301, 120, 360, 320);
+			panel.add(btnSto2);
+			
+			JButton btnSto3 = new JButton("Sto3");
+			btnSto3.setIcon(new ImageIcon("C:\\Users\\urosm\\git\\project9-2017\\kafic\\icons\\sto.png"));
+			btnSto3.setBounds(789, 349, 360, 320);
+			panel.add(btnSto3);
+			
+			JButton btnSto4 = new JButton("Sto4");
+			btnSto4.setIcon(new ImageIcon("C:\\Users\\urosm\\git\\project9-2017\\kafic\\icons\\sto.png"));
+			btnSto4.setBounds(290, 565, 360, 320);
+			panel.add(btnSto4);
+			
+			JButton btnSto5 = new JButton("Sto5");
+			btnSto5.setIcon(new ImageIcon("C:\\Users\\urosm\\git\\project9-2017\\kafic\\icons\\sto.png"));
+			btnSto5.setBounds(1301, 565, 360, 320);
+			panel.add(btnSto5);
 		}
 		return panel;
 	}
