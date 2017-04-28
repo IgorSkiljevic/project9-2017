@@ -9,35 +9,23 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class LoginGUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldUser;
-	private JTextField textFieldPassword;
+	private JPasswordField passwordField;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoginGUI frame = new LoginGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public LoginGUI() {
+
+		
 		setResizable(false);
 		setTitle("Log In");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,19 +47,19 @@ public class LoginGUI extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		JButton btnLogin = new JButton("Log in");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				GuiKontroler.logInDugme(textFieldUser.getText(), passwordField.getPassword());
+			}
+		});
 		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnLogin.setBounds(269, 122, 97, 25);
 		contentPane.add(btnLogin);
 		
 		textFieldUser = new JTextField();
-		textFieldUser.setBounds(131, 104, 116, 25);
+		textFieldUser.setBounds(129, 105, 116, 25);
 		contentPane.add(textFieldUser);
 		textFieldUser.setColumns(10);
-		
-		textFieldPassword = new JTextField();
-		textFieldPassword.setBounds(131, 142, 116, 22);
-		contentPane.add(textFieldPassword);
-		textFieldPassword.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Sre\u0107an rad!");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -79,5 +67,13 @@ public class LoginGUI extends JFrame {
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
 		lblNewLabel_2.setBounds(131, 31, 116, 30);
 		contentPane.add(lblNewLabel_2);
+		contentPane.add(getPasswordField());
+	}
+	private JPasswordField getPasswordField() {
+		if (passwordField == null) {
+			passwordField = new JPasswordField();
+			passwordField.setBounds(129, 142, 116, 25);
+		}
+		return passwordField;
 	}
 }

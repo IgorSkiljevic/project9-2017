@@ -11,38 +11,34 @@ import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.JTextField;
 
 public class StanjeGUI extends JFrame {
 
 	private JPanel contentPane;
+	public JTextArea textArea;
+	public JTextField txtDatum;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					StanjeGUI frame = new StanjeGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+
+	public StanjeGUI() {
+		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				GuiKontroler.zatvoriProzorStanjeGUI();
 			}
 		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public StanjeGUI() {
+		
 		setResizable(false);
 		setTitle("Dnevni pazar");
 		setSize(new Dimension(999, 736));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 763, 736);
 		setLocationRelativeTo(null);
 		setLocationRelativeTo(null);
@@ -51,11 +47,6 @@ public class StanjeGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
-		
-		JTextPane textPaneDatumIzvestaja = new JTextPane();
-		textPaneDatumIzvestaja.setEditable(false);
-		textPaneDatumIzvestaja.setBounds(434, 13, 120, 22);
-		contentPane.add(textPaneDatumIzvestaja);
 		
 		JLabel lblNewLabel_1 = new JLabel("Dnevni pazar na datum:");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -71,13 +62,21 @@ public class StanjeGUI extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		panel.add(scrollPane, BorderLayout.CENTER);
-		
-		JTextArea txtrAsdAsDa = new JTextArea();
-		txtrAsdAsDa.setLineWrap(true);
-		txtrAsdAsDa.setWrapStyleWord(true);
-		txtrAsdAsDa.setText("asd jvhjchfxfgx rx hdz hfdz hfdxhfxhfx hfgx fgx gfx gfx jgfxgfx hgfx jfgx hfgx hgfxh f xh hgfx hgfx hfgx hfgxfg hgf\r\nas\r\nda\r\nsd\r\nas\r\nd\r\nas\r\nda\r\n\r\nd\r\na\r\nd\r\na\r\nsd\r\n\r\nasd\r\n\r\nas\r\nd\r\nas\r\nd\r\na\r\nsd\r\nas\r\nd\r\nas\r\nd\r\na\r\nd\r\nas\r\nd\r\na\r\nd\r\nas\r\nd\r\nas\r\nd\r\na\r\nd\r\nasd\r\na\r\nd\r\na\r\nd\r\na\r\nd\r\nad\r\na\r\nd\r\nas\r\nd\r\nasd\r\n\r\nasd\r\na\r\nsd\r\nas\r\ndad");
-		txtrAsdAsDa.setEditable(false);
-		txtrAsdAsDa.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		scrollPane.setViewportView(txtrAsdAsDa);
+		scrollPane.setViewportView(getTextArea());
+		contentPane.add(getTxtDatum());
+	}
+	private JTextArea getTextArea() {
+		if (textArea == null) {
+			textArea = new JTextArea();
+		}
+		return textArea;
+	}
+	private JTextField getTxtDatum() {
+		if (txtDatum == null) {
+			txtDatum = new JTextField();
+			txtDatum.setBounds(452, 16, 159, 20);
+			txtDatum.setColumns(10);
+		}
+		return txtDatum;
 	}
 }
