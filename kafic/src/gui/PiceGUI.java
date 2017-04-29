@@ -19,6 +19,8 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import javax.swing.JTextArea;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PiceGUI extends JFrame {
 
@@ -136,14 +138,34 @@ public class PiceGUI extends JFrame {
 		btnNewButton_1.setBounds(651, 505, 130, 39);
 		contentPane.add(btnNewButton_1);
 	}
+
 	private JList getListaTopliNapici() {
 		if (listaTopliNapici == null) {
 			listaTopliNapici = new JList();
+			listaTopliNapici.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+
+					GuiKontroler.odselektujOstale(listaAlkoholnaPica, listaBezalkoholnaPica, listaPiva);
+				}
+
+			});
+			listaTopliNapici.addMouseListener(new MouseAdapter() {
+			    public void mouseClicked(MouseEvent evt) {
+			        if (evt.getClickCount() == 2) {
+			        	String ispis = listaTopliNapici.getSelectedValue().toString();
+			        	GuiKontroler.ispisiUPolje(ispis,textArea);
+			        }
+			    }
+			});
+
 			listaTopliNapici.setModel(new AbstractListModel() {
 				String[] values = new String[] {};
+
 				public int getSize() {
 					return values.length;
 				}
+
 				public Object getElementAt(int index) {
 					return values[index];
 				}
@@ -151,24 +173,70 @@ public class PiceGUI extends JFrame {
 		}
 		return listaTopliNapici;
 	}
+
 	private JList getListaBezalkoholnaPica() {
 		if (listaBezalkoholnaPica == null) {
 			listaBezalkoholnaPica = new JList();
+			listaBezalkoholnaPica.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					GuiKontroler.odselektujOstale(listaAlkoholnaPica, listaTopliNapici, listaPiva);
+				}
+			});
+			listaBezalkoholnaPica.addMouseListener(new MouseAdapter() {
+			    public void mouseClicked(MouseEvent evt) {
+			        if (evt.getClickCount() == 2) {
+			        	String ispis = listaBezalkoholnaPica.getSelectedValue().toString();
+			        	GuiKontroler.ispisiUPolje(ispis,textArea);
+			        }
+			    }
+			});
 		}
 		return listaBezalkoholnaPica;
 	}
+
 	private JList getListaAlkoholnaPica() {
 		if (listaAlkoholnaPica == null) {
 			listaAlkoholnaPica = new JList();
+			listaAlkoholnaPica.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					GuiKontroler.odselektujOstale(listaTopliNapici, listaBezalkoholnaPica, listaPiva);
+				}
+			});
+			listaAlkoholnaPica.addMouseListener(new MouseAdapter() {
+			    public void mouseClicked(MouseEvent evt) {
+			        if (evt.getClickCount() == 2) {
+			        	String ispis = listaAlkoholnaPica.getSelectedValue().toString();
+			        	GuiKontroler.ispisiUPolje(ispis,textArea);
+			        }
+			    }
+			});
 		}
 		return listaAlkoholnaPica;
 	}
+
 	private JList getListaPiva() {
 		if (listaPiva == null) {
 			listaPiva = new JList();
+			listaPiva.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					GuiKontroler.odselektujOstale(listaAlkoholnaPica, listaBezalkoholnaPica, listaTopliNapici);
+				}
+			});
+			listaPiva.addMouseListener(new MouseAdapter() {
+			    public void mouseClicked(MouseEvent evt) {
+			        if (evt.getClickCount() == 2) {
+			        	String ispis = listaPiva.getSelectedValue().toString();
+			        	GuiKontroler.ispisiUPolje(ispis,textArea);
+			        }
+			    }
+			});
 		}
 		return listaPiva;
 	}
+
 	private JTextArea getTextArea() {
 		if (textArea == null) {
 			textArea = new JTextArea();

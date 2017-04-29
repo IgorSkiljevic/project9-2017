@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.ListModel;
 
 import Logika.ImpZaKontroler;
@@ -37,9 +38,9 @@ public class GuiKontroler {
 	}
 
 	public static void logInDugme(String user, char[] password) {
-		String prolaz = util.proveriDaLiJeRegistrovan(user, password);
+		// String prolaz = util.proveriDaLiJeRegistrovan(user, password);
 
-		// String prolaz = "Uros Momcilovic"; test
+		String prolaz = "Uros Momcilovic";
 		// String prolaz = "admin"; test
 
 		if (prolaz.equals("admin")) {
@@ -146,13 +147,56 @@ public class GuiKontroler {
 		String[] piva = util.izvuciSvaPicaZadatogTipaIzListe("pivo");
 		String[] topliNapici = util.izvuciSvaPicaZadatogTipaIzListe("topliNapitak");
 
-		// DodatiMetodu Koja ispisuje pica u Jliste
+		DefaultListModel modelAlkohol = new DefaultListModel<>();
+		DefaultListModel modelBezAlkohol = new DefaultListModel<>();
+		DefaultListModel modelPiva = new DefaultListModel<>();
+		DefaultListModel modelTopliNapici = new DefaultListModel<>();
+
+		piceGui.listaAlkoholnaPica.setModel(modelAlkohol);
+		piceGui.listaBezalkoholnaPica.setModel(modelBezAlkohol);
+		piceGui.listaPiva.setModel(modelPiva);
+		piceGui.listaTopliNapici.setModel(modelTopliNapici);
+
+		String[] picaA = { "vino", "rakija" };
+		String[] picaBA = { "sok", "limunada" };
+		String[] picaT = { "caj", "kafa" };
+		String[] picaP = { "niksicnko", "lav" };
+
+		alkoholna = picaA;
+		bezalkoholna = picaBA;
+		topliNapici = picaT;
+		piva = picaP;
+
+		util.dodajPicaUModel(modelAlkohol, alkoholna);
+		util.dodajPicaUModel(modelBezAlkohol, bezalkoholna);
+		util.dodajPicaUModel(modelTopliNapici, topliNapici);
+		util.dodajPicaUModel(modelPiva, piva);
 
 	}
 
 	public static void zatvoriProzorPiceGUI() {
 		piceGui.dispose();
 		piceGui = null;
+	}
+
+	public static void odselektujOstale(JList lista1, JList lista2, JList lista3) {
+		//Ovo verovatno moze mnogo bolje da se uradi
+		try {
+			lista1.setSelectedIndices(null);
+		} catch (NullPointerException e) {
+			try {
+				lista2.setSelectedIndices(null);
+			} catch (Exception e1) {
+				try {
+					lista3.setSelectedIndices(null);
+				} catch (Exception e2) {
+				}
+			}
+		}
+	}
+
+	public static void ispisiUPolje(String ispis, JTextArea textArea) {
+		textArea.setText(textArea.getText()  + ispis + "\n");
 	}
 
 }

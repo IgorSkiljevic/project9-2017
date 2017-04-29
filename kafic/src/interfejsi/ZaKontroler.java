@@ -42,6 +42,7 @@ public interface ZaKontroler {
 	 * 
 	 * @param tip Predstavlja tip pica(alkoholna, bezalkoholna, pivo, toplinapitak)
 	 * @return vraca niz Stringova. Svaki string u nizu je tip pica koji se nalazi u listi pica u ponudi.
+	 * primer: za uneti parametar piva, vraca se niz stringova {"Niksicno 0.5 - 150 ","Lav 0.33 - 120"}
 	 */
 	public String [] izvuciSvaPicaZadatogTipaIzListe(String tip);
 
