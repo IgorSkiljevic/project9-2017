@@ -24,7 +24,8 @@ public class ImpZaKontroler implements ZaKontroler {
 		listaKonobara = KonobarBaza.ubaciUListuSveKonobare();
 		prodatoPice = new LinkedList<Pice>();
 	}
-
+	
+	@Override
 	public String proveriDaLiJeRegistrovan(String user, char[] password) {
 		for (int i = 0; i < listaKonobara.size(); i++) {
 			if(user.equals(listaKonobara.get(i).getUser())){
@@ -40,7 +41,14 @@ public class ImpZaKontroler implements ZaKontroler {
 
 	@Override
 	public boolean proveriDaLiImaDatogUsera(String user) {
-		// TODO Auto-generated method stub
+		if(user.equals(""))
+			return false;
+		
+		for (int i = 0; i < listaKonobara.size(); i++) {
+			if(listaKonobara.get(i).getUser().equals(user))
+				return true;
+		}
+		
 		return false;
 	}
 

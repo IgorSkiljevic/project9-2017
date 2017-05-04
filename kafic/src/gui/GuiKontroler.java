@@ -25,9 +25,10 @@ public class GuiKontroler {
 	private static PiceGUI piceGui;
 	private static StanjeGUI stanjeGui;
 
-	static ImpZaKontroler util = new ImpZaKontroler();
+	private static ImpZaKontroler util;
 
 	public static void main(String[] args) {
+		util = new ImpZaKontroler();
 		loginGui = new LoginGUI();
 		loginGui.setVisible(true);
 	}
@@ -40,7 +41,7 @@ public class GuiKontroler {
 	public static void logInDugme(String user, char[] password) {
 		// String prolaz = util.proveriDaLiJeRegistrovan(user, password);
 
-		String prolaz = "Uros Momcilovic";
+		String prolaz = util.proveriDaLiJeRegistrovan(user, password);
 		// String prolaz = "admin"; test
 
 		if (prolaz.equals("admin")) {
