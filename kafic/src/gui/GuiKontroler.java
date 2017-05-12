@@ -24,7 +24,7 @@ public class GuiKontroler {
 	private static NoviKonobarGui noviKonobarGui;
 	private static PiceGUI piceGui;
 	private static StanjeGUI stanjeGui;
-
+	public static DefaultListModel model;
 	static ImpZaKontroler util = new ImpZaKontroler();
 
 	public static void main(String[] args) {
@@ -180,7 +180,7 @@ public class GuiKontroler {
 	}
 
 	public static void odselektujOstale(JList lista1, JList lista2, JList lista3) {
-		//Ovo verovatno moze mnogo bolje da se uradi
+		// Ovo verovatno moze mnogo bolje da se uradi
 		try {
 			lista1.setSelectedIndices(null);
 		} catch (NullPointerException e) {
@@ -195,8 +195,23 @@ public class GuiKontroler {
 		}
 	}
 
-	public static void ispisiUPolje(String ispis, JTextArea textArea) {
-		textArea.setText(textArea.getText()  + ispis + "\n");
+	public static void ispisiUJListu(String ispis, JList Jlista) {
+		if (model == null) {
+			model = new DefaultListModel<>();
+		}
+		model.addElement(ispis);
+		Jlista.setModel(model);
+	}
+
+	public static void PiceGuiRacun() {
+
+		model = null;
+		ispisiUJListu("", piceGui.list);
+
+	}
+
+	public static void obrisiStavkuIzListe(JList lista, int index) {
+		model.remove(index);
 	}
 
 }
