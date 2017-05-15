@@ -1,21 +1,15 @@
 package gui;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.LinkedList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
-import javax.swing.ListModel;
 
 import Logika.ImpZaKontroler;
 import baza.bModel.PiceBaza;
-import model.Pice;
 
 public class GuiKontroler {
 	private static AdminGUI adminGui;
@@ -24,8 +18,10 @@ public class GuiKontroler {
 	private static NoviKonobarGui noviKonobarGui;
 	private static PiceGUI piceGui;
 	private static StanjeGUI stanjeGui;
+	public static DefaultListModel<Object> model;
+	
+	static ImpZaKontroler util = new ImpZaKontroler();
 
-	private static ImpZaKontroler util;
 
 	public static void main(String[] args) {
 		util = new ImpZaKontroler();
@@ -148,10 +144,10 @@ public class GuiKontroler {
 		String[] piva = util.izvuciSvaPicaZadatogTipaIzListe("pivo");
 		String[] topliNapici = util.izvuciSvaPicaZadatogTipaIzListe("topliNapitak");
 
-		DefaultListModel modelAlkohol = new DefaultListModel<>();
-		DefaultListModel modelBezAlkohol = new DefaultListModel<>();
-		DefaultListModel modelPiva = new DefaultListModel<>();
-		DefaultListModel modelTopliNapici = new DefaultListModel<>();
+		DefaultListModel<Object> modelAlkohol = new DefaultListModel<>();
+		DefaultListModel<Object> modelBezAlkohol = new DefaultListModel<>();
+		DefaultListModel<Object> modelPiva = new DefaultListModel<>();
+		DefaultListModel<Object> modelTopliNapici = new DefaultListModel<>();
 
 		piceGui.listaAlkoholnaPica.setModel(modelAlkohol);
 		piceGui.listaBezalkoholnaPica.setModel(modelBezAlkohol);
@@ -180,8 +176,8 @@ public class GuiKontroler {
 		piceGui = null;
 	}
 
-	public static void odselektujOstale(JList lista1, JList lista2, JList lista3) {
-		//Ovo verovatno moze mnogo bolje da se uradi
+	public static void odselektujOstale(JList<?> lista1, JList<?> lista2, JList<?> lista3) {
+		// Ovo verovatno moze mnogo bolje da se uradi
 		try {
 			lista1.setSelectedIndices(null);
 		} catch (NullPointerException e) {
@@ -196,8 +192,23 @@ public class GuiKontroler {
 		}
 	}
 
-	public static void ispisiUPolje(String ispis, JTextArea textArea) {
-		textArea.setText(textArea.getText()  + ispis + "\n");
+	public static void ispisiUJListu(String ispis, JList<Object> Jlista) {
+		if (model == null) {
+			model = new DefaultListModel<>();
+		}
+		model.addElement(ispis);
+		Jlista.setModel(model);
+	}
+
+	public static void PiceGuiRacun() {
+
+		model = null;
+		ispisiUJListu("", piceGui.list);
+
+	}
+
+	public static void obrisiStavkuIzListe(JList<?> lista, int index) {
+		model.remove(index);
 	}
 
 }

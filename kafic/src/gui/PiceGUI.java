@@ -21,6 +21,8 @@ import javax.swing.AbstractListModel;
 import javax.swing.JTextArea;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PiceGUI extends JFrame {
 
@@ -29,7 +31,7 @@ public class PiceGUI extends JFrame {
 	public JList listaBezalkoholnaPica;
 	public JList listaAlkoholnaPica;
 	public JList listaPiva;
-	private JTextArea textArea;
+	public JList list;
 
 	public PiceGUI() {
 
@@ -119,7 +121,7 @@ public class PiceGUI extends JFrame {
 		JScrollPane scrollPane_4 = new JScrollPane();
 		scrollPane_4.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		panel.add(scrollPane_4, BorderLayout.CENTER);
-		scrollPane_4.setViewportView(getTextArea());
+		scrollPane_4.setViewportView(getList());
 
 		JLabel lblNewLabel_4 = new JLabel("PREDRA\u010CUN:");
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
@@ -128,11 +130,21 @@ public class PiceGUI extends JFrame {
 		contentPane.add(lblNewLabel_4);
 
 		JButton btnNewButton = new JButton("Ukloni");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				GuiKontroler.obrisiStavkuIzListe(list,list.getLastVisibleIndex());
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton.setBounds(458, 505, 130, 39);
 		contentPane.add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("RA\u010CUN");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				GuiKontroler.PiceGuiRacun();
+			}
+		});
 		btnNewButton_1.setForeground(Color.RED);
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton_1.setBounds(651, 505, 130, 39);
@@ -151,12 +163,12 @@ public class PiceGUI extends JFrame {
 
 			});
 			listaTopliNapici.addMouseListener(new MouseAdapter() {
-			    public void mouseClicked(MouseEvent evt) {
-			        if (evt.getClickCount() == 2) {
-			        	String ispis = listaTopliNapici.getSelectedValue().toString();
-			        	GuiKontroler.ispisiUPolje(ispis,textArea);
-			        }
-			    }
+				public void mouseClicked(MouseEvent evt) {
+					if (evt.getClickCount() == 2) {
+						String ispis = listaTopliNapici.getSelectedValue().toString();
+						GuiKontroler.ispisiUJListu(ispis, list);
+					}
+				}
 			});
 
 			listaTopliNapici.setModel(new AbstractListModel() {
@@ -184,12 +196,12 @@ public class PiceGUI extends JFrame {
 				}
 			});
 			listaBezalkoholnaPica.addMouseListener(new MouseAdapter() {
-			    public void mouseClicked(MouseEvent evt) {
-			        if (evt.getClickCount() == 2) {
-			        	String ispis = listaBezalkoholnaPica.getSelectedValue().toString();
-			        	GuiKontroler.ispisiUPolje(ispis,textArea);
-			        }
-			    }
+				public void mouseClicked(MouseEvent evt) {
+					if (evt.getClickCount() == 2) {
+						String ispis = listaBezalkoholnaPica.getSelectedValue().toString();
+						GuiKontroler.ispisiUJListu(ispis, list);
+					}
+				}
 			});
 		}
 		return listaBezalkoholnaPica;
@@ -205,12 +217,12 @@ public class PiceGUI extends JFrame {
 				}
 			});
 			listaAlkoholnaPica.addMouseListener(new MouseAdapter() {
-			    public void mouseClicked(MouseEvent evt) {
-			        if (evt.getClickCount() == 2) {
-			        	String ispis = listaAlkoholnaPica.getSelectedValue().toString();
-			        	GuiKontroler.ispisiUPolje(ispis,textArea);
-			        }
-			    }
+				public void mouseClicked(MouseEvent evt) {
+					if (evt.getClickCount() == 2) {
+						String ispis = listaAlkoholnaPica.getSelectedValue().toString();
+						GuiKontroler.ispisiUJListu(ispis, list);
+					}
+				}
 			});
 		}
 		return listaAlkoholnaPica;
@@ -226,22 +238,21 @@ public class PiceGUI extends JFrame {
 				}
 			});
 			listaPiva.addMouseListener(new MouseAdapter() {
-			    public void mouseClicked(MouseEvent evt) {
-			        if (evt.getClickCount() == 2) {
-			        	String ispis = listaPiva.getSelectedValue().toString();
-			        	GuiKontroler.ispisiUPolje(ispis,textArea);
-			        }
-			    }
+				public void mouseClicked(MouseEvent evt) {
+					if (evt.getClickCount() == 2) {
+						String ispis = listaPiva.getSelectedValue().toString();
+						GuiKontroler.ispisiUJListu(ispis, list);
+					}
+				}
 			});
 		}
 		return listaPiva;
 	}
 
-	private JTextArea getTextArea() {
-		if (textArea == null) {
-			textArea = new JTextArea();
-			textArea.setEditable(false);
+	private JList getList() {
+		if (list == null) {
+			list = new JList();
 		}
-		return textArea;
+		return list;
 	}
 }
