@@ -1,6 +1,5 @@
 package baza.bModel;
 
-import java.lang.Thread.State;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,8 +7,7 @@ import java.sql.Statement;
 import java.util.LinkedList;
 
 import baza.konekcija.Konekcija;
-import model.Konobar;
-import model.Pice;;
+import model.Konobar;;
 
 public class KonobarBaza {
 
@@ -33,7 +31,7 @@ public class KonobarBaza {
 				String password = rs.getString("Password");
 				boolean admin = false;
 				String a = rs.getString("Admin");
-				if (a.equals("true")) {
+				if (a.contains("true")) {
 					admin = true;
 				}
 				Konobar k = new Konobar(username, password, admin);
@@ -76,10 +74,13 @@ public class KonobarBaza {
 			e.printStackTrace();
 		}
 	}
-	// public static void main(String[] args) {
-	// Konobar k = new Konobar("Igor", "12345", true);
-	// LinkedList<Konobar> konobari = KonobarBaza.ubaciUListuSveKonobare();
-	// konobari.add(k);
-	// KonobarBaza.prebaciSveKonobareIzListeUBazu(konobari);
-	// }
+/*	 public static void main(String[] args) {
+		Konobar a = new Konobar("Admin", "123", true);
+		Konobar b = new Konobar("Jova", "321", false);
+		LinkedList<Konobar> konobari = KonobarBaza.ubaciUListuSveKonobare();
+		konobari.add(a);
+		konobari.add(b);
+		KonobarBaza.prebaciSveKonobareIzListeUBazu(konobari);
+	}
+	*/
 }

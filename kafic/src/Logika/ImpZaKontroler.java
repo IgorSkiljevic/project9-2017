@@ -1,5 +1,6 @@
 package Logika;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.swing.DefaultListModel;
@@ -29,10 +30,16 @@ public class ImpZaKontroler implements ZaKontroler {
 	public String proveriDaLiJeRegistrovan(String user, char[] password) {
 		for (int i = 0; i < listaKonobara.size(); i++) {
 			if(user.equals(listaKonobara.get(i).getUser())){
-				if(password.toString().equals(listaKonobara.get(i).getPass())){
-					if(listaKonobara.get(i).isAdmin())
+				String pass = "";
+				for (int j = 0; j < password.length; j++) {
+					pass += password[j];
+				}
+				if(pass.equals(listaKonobara.get(i).getPass())){
+					if(listaKonobara.get(i).isAdmin()){
 						return "admin";
-					else return listaKonobara.get(i).getUser();
+					}else{
+						return listaKonobara.get(i).getUser();
+					}
 				}
 			}
 		}
@@ -64,7 +71,18 @@ public class ImpZaKontroler implements ZaKontroler {
 
 	@Override
 	public String[] izvuciSvaPicaZadatogTipaIzListe(String tip) {
-		// TODO Auto-generated method stub
+		ArrayList<Pice> pice = new ArrayList(); 
+		for (int i = 0; i < listaPica.size(); i++) {
+			if(listaPica.get(i).getTip().equals(tip)){
+				pice.add(listaPica.get(i));
+			}
+		}
+		
+		String[] niz = new String[pice.size()];
+		for (int i = 0; i < niz.length; i++) {
+			//ovde dodati format za ispis
+			niz[i] = pice.get(i).getIme() ;
+		}
 		return null;
 	}
 
