@@ -50,6 +50,9 @@ public class LoginGUI extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				GuiKontroler.logInDugme(textFieldUser.getText(), passwordField.getPassword());
+				GuiKontroler.obrisiText(textFieldUser);
+				GuiKontroler.obrisiText(passwordField);
+				
 			}
 		});
 		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 13));

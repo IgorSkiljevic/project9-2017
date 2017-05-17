@@ -1,6 +1,5 @@
 package baza.bModel;
 
-import java.lang.Thread.State;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,8 +7,7 @@ import java.sql.Statement;
 import java.util.LinkedList;
 
 import baza.konekcija.Konekcija;
-import model.Konobar;
-import model.Pice;;
+import model.Konobar;;
 
 public class KonobarBaza {
 
@@ -33,9 +31,12 @@ public class KonobarBaza {
 				String password = rs.getString("Password");
 				boolean admin = false;
 				String a = rs.getString("Admin");
-				if (a.equals("true")) {
+				if (a.contains("true")) {
 					admin = true;
 				}
+//				if (a.equalsIgnoreCase("true")) { NE RADI!
+//					admin = true;
+//				}
 				Konobar k = new Konobar(username, password, admin);
 				listaKonobara.add(k);
 			}
@@ -64,7 +65,9 @@ public class KonobarBaza {
 			s.executeUpdate(SQL);
 
 			for (Konobar konobar : listaKonobara) {
-				String admin = konobar.isAdmin() + "";
+//				String admin = konobar.isAdmin() + "";
+				String admin = "false";
+				if(konobar.isAdmin()){admin = "true";}
 				String SQL2 = "INSERT INTO korisnici (Username , Password , Admin)" + " VALUES ('" + konobar.getUser()
 						+ "' , '" + konobar.getPass() + "' , '" + admin + " ')";
 				System.out.println(SQL2);

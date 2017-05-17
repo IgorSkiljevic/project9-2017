@@ -25,16 +25,15 @@ public class RacunBaza {
 				String SQL = "INSERT INTO prihod " + "(smena , dan , proizvod , sifra) VALUES " + "('" + r.getSmena() + "' , '"
 						+ r.getDatum() + " ' , '" +p.getIme() + "' , '" +p.getSifra() + "')";
 
-				String SQL2 = "UPDATE stanje_pica" + " SET stanje = " + " stanje - '1' WHERE sifra = '" + p.getSifra()
-						+ "'";
+//				String SQL2 = "UPDATE stanje_pica" + " SET stanje = " + " stanje - '1' WHERE sifra = '" + p.getSifra()
+//						+ "'";
 
-				s.executeUpdate(SQL2);
+//				s.executeUpdate(SQL2);
 				s.executeUpdate(SQL);
 
 
 			}
 			s.close();
-			c.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

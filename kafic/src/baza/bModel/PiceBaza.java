@@ -32,10 +32,11 @@ public class PiceBaza {
 
 			s.executeUpdate(SQL);
 
-			s.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			
 		}
+		
 	}
 
 	/**
@@ -65,6 +66,7 @@ public class PiceBaza {
 			}
 
 			s.close();
+//			c.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -84,7 +86,7 @@ public class PiceBaza {
 			Connection c = Konekcija.getInstance();
 			Statement s = c.createStatement();
 
-			String SQL = "SELECT smena , proizvod " + "FROM prihod WHERE dan = '" + datum + "'";
+			String SQL = "SELECT smena , proizvod , sifra " + "FROM prihod WHERE dan = '" + datum + "'";
 
 			System.out.println(SQL);
 
@@ -93,8 +95,9 @@ public class PiceBaza {
 			while (rs.next()) {
 				String smena = rs.getString("smena");
 				String proizvod = rs.getString("proizvod");
+				String sifra = rs.getString("sifra");
 
-				ispis = ispis + " " + smena + " " + proizvod + " " + "\n";
+				ispis = ispis + " " + smena + " " + proizvod + " " + sifra + "\n";
 			}
 
 			s.close();
@@ -130,12 +133,6 @@ public class PiceBaza {
 		}
 	}
 
-//	public static void main(String[] args) {
-//		Pice px = new Pice(3, "kisela", "gazirano", 5, 111);
-//		LinkedList<Pice> pica = new LinkedList<>();
-//		pica = PiceBaza.napuniListuTekucimStanjemPica();
-//		pica.add(px);
-//		PiceBaza.unesiListuUBazu(pica);
-//	}
+
 
 }

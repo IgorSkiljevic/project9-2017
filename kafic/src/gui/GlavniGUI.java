@@ -22,15 +22,20 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GlavniGUI extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel panel;
 	private JPanel panel_1;
-	private JLabel lblVreme;
+	public JLabel lblVreme;
 	private JLabel lblKonobar;
-	private JLabel lblSmena;
+	public JLabel lblSmena;
+	private JMenuBar menuBar;
 
 	public GlavniGUI() {
 
@@ -47,6 +52,7 @@ public class GlavniGUI extends JFrame {
 		setPreferredSize(DimMax);
 
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setJMenuBar(getMenuBar_1());
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -208,5 +214,20 @@ public class GlavniGUI extends JFrame {
 			lblSmena.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		}
 		return lblSmena;
+	}
+	private JMenuBar getMenuBar_1() {
+		if (menuBar == null) {
+			menuBar = new JMenuBar();
+			
+			JMenu mnDodajPice = new JMenu("Dodaj pice");
+			mnDodajPice.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					GuiKontroler.otvoriProzorDodavanjePica();
+				}
+			});
+			menuBar.add(mnDodajPice);
+		}
+		return menuBar;
 	}
 }

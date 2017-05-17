@@ -1,28 +1,26 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.Color;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JTextPane;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
-import javax.swing.JTextArea;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.AbstractListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
 
 public class PiceGUI extends JFrame {
 
@@ -32,6 +30,7 @@ public class PiceGUI extends JFrame {
 	public JList listaAlkoholnaPica;
 	public JList listaPiva;
 	public JList list;
+	private JTextField txtIznos;
 
 	public PiceGUI() {
 
@@ -123,6 +122,10 @@ public class PiceGUI extends JFrame {
 		panel.add(scrollPane_4, BorderLayout.CENTER);
 		scrollPane_4.setViewportView(getList());
 
+		txtIznos = new JTextField();
+		scrollPane_4.setColumnHeaderView(txtIznos);
+		txtIznos.setColumns(10);
+
 		JLabel lblNewLabel_4 = new JLabel("PREDRA\u010CUN:");
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -132,7 +135,11 @@ public class PiceGUI extends JFrame {
 		JButton btnNewButton = new JButton("Ukloni");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				GuiKontroler.obrisiStavkuIzListe(list,list.getLastVisibleIndex());
+				String ispis = GuiKontroler.obrisiStavkuIzListe(list, list.getLastVisibleIndex());
+				String c = ispis.substring(ispis.lastIndexOf(" ") + 1, ispis.length());
+
+				int cena = Integer.parseInt(c) * (-1);
+				GuiKontroler.dodajCenu(cena, txtIznos);
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -142,7 +149,10 @@ public class PiceGUI extends JFrame {
 		JButton btnNewButton_1 = new JButton("RA\u010CUN");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				
 				GuiKontroler.PiceGuiRacun();
+				GuiKontroler.obrisiText(txtIznos);
 			}
 		});
 		btnNewButton_1.setForeground(Color.RED);
@@ -167,6 +177,11 @@ public class PiceGUI extends JFrame {
 					if (evt.getClickCount() == 2) {
 						String ispis = listaTopliNapici.getSelectedValue().toString();
 						GuiKontroler.ispisiUJListu(ispis, list);
+
+						String c = ispis.substring(ispis.lastIndexOf(" ") + 1, ispis.length());
+
+						int cena = Integer.parseInt(c);
+						GuiKontroler.dodajCenu(cena, txtIznos);
 					}
 				}
 			});
@@ -200,6 +215,11 @@ public class PiceGUI extends JFrame {
 					if (evt.getClickCount() == 2) {
 						String ispis = listaBezalkoholnaPica.getSelectedValue().toString();
 						GuiKontroler.ispisiUJListu(ispis, list);
+
+						String c = ispis.substring(ispis.lastIndexOf(" ") + 1, ispis.length());
+
+						int cena = Integer.parseInt(c);
+						GuiKontroler.dodajCenu(cena, txtIznos);
 					}
 				}
 			});
@@ -221,6 +241,11 @@ public class PiceGUI extends JFrame {
 					if (evt.getClickCount() == 2) {
 						String ispis = listaAlkoholnaPica.getSelectedValue().toString();
 						GuiKontroler.ispisiUJListu(ispis, list);
+
+						String c = ispis.substring(ispis.lastIndexOf(" ") + 1, ispis.length());
+
+						int cena = Integer.parseInt(c);
+						GuiKontroler.dodajCenu(cena, txtIznos);
 					}
 				}
 			});
@@ -242,6 +267,11 @@ public class PiceGUI extends JFrame {
 					if (evt.getClickCount() == 2) {
 						String ispis = listaPiva.getSelectedValue().toString();
 						GuiKontroler.ispisiUJListu(ispis, list);
+
+						String c = ispis.substring(ispis.lastIndexOf(" ") + 1, ispis.length());
+
+						int cena = Integer.parseInt(c);
+						GuiKontroler.dodajCenu(cena, txtIznos);
 					}
 				}
 			});

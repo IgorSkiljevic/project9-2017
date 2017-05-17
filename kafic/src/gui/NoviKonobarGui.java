@@ -14,14 +14,15 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import javax.swing.JPasswordField;
 
 public class NoviKonobarGui extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textFieldAdminUser;
+	private  JTextField textFieldAdminUser;
 	private JTextField textFieldAdminovPassword;
 	private JTextField textFieldNoviUser;
-	private JTextField textFieldNoviPassword;
+	private  JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -94,14 +95,12 @@ public class NoviKonobarGui extends JFrame {
 		contentPane.add(textFieldNoviUser);
 		textFieldNoviUser.setColumns(10);
 		
-		textFieldNoviPassword = new JTextField();
-		textFieldNoviPassword.setBounds(220, 174, 116, 22);
-		contentPane.add(textFieldNoviPassword);
-		textFieldNoviPassword.setColumns(10);
-		
 		JButton btnDodajUBazu = new JButton("Dodajte novog konobara");
 		btnDodajUBazu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				GuiKontroler.ubaciNovogKonobaraUListu(textFieldNoviUser.getText(),passwordField.getPassword());
+				passwordField.setText(""); // ne radi?
+				textFieldNoviUser.setText(""); //ne radi?
 			}
 		});
 		btnDodajUBazu.setForeground(Color.RED);
@@ -114,6 +113,13 @@ public class NoviKonobarGui extends JFrame {
 		lblUnesitePonovoUser.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblUnesitePonovoUser.setBounds(29, 13, 307, 16);
 		contentPane.add(lblUnesitePonovoUser);
+		contentPane.add(getPasswordField());
 	}
-
+	private JPasswordField getPasswordField() {
+		if (passwordField == null) {
+			passwordField = new JPasswordField();
+			passwordField.setBounds(220, 174, 116, 22);
+		}
+		return passwordField;
+	}
 }
