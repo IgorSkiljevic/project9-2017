@@ -79,10 +79,13 @@ public class KonobarBaza {
 			e.printStackTrace();
 		}
 	}
-	// public static void main(String[] args) {
-	// Konobar k = new Konobar("Igor", "12345", true);
-	// LinkedList<Konobar> konobari = KonobarBaza.ubaciUListuSveKonobare();
-	// konobari.add(k);
-	// KonobarBaza.prebaciSveKonobareIzListeUBazu(konobari);
-	// }
+/*	 public static void main(String[] args) {
+		Konobar a = new Konobar("Admin", "123", true);
+		Konobar b = new Konobar("Jova", "321", false);
+		LinkedList<Konobar> konobari = KonobarBaza.ubaciUListuSveKonobare();
+		konobari.add(a);
+		konobari.add(b);
+		KonobarBaza.prebaciSveKonobareIzListeUBazu(konobari);
+	}
+	*/
 }
